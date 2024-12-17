@@ -321,6 +321,12 @@ def add_inference_args(parser: argparse.ArgumentParser):
         help="Prompt for sampling during evaluation.",
     )
     group.add_argument(
+        "--prompt_file",
+        type=str,
+        default=None,
+        help="Prompt file for sampling during evaluation.",
+    )
+    group.add_argument(
         "--seed-type",
         type=str,
         default="auto",
