@@ -22,19 +22,19 @@ def main():
     if not os.path.exists(args.save_path):
         os.makedirs(save_path, exist_ok=True)
 
-    # Load models
-    hunyuan_video_sampler = HunyuanVideoSampler.from_pretrained(models_root_path, args=args)
-
-    # Get the updated args
-    args = hunyuan_video_sampler.args
-
-    # Start sampling
-    # TODO: batch inference check
     if args.prompt_file and os.path.exists(args.prompt_file):
         with open(args.prompt_file, 'r') as fd:
             prompts = [line.strip() for line in fd.readlines()]
     else:
         raise ValueError(f'Prompt file invalid: {args.prompt_file}')
+
+    # Load models
+    hunyuan_video_sampler = HunyuanVideoSampler.from_pretrained(models_root_path, args=args)
+
+    # Get the updated args
+    args = hunyuan_video_sampler.args
+    # Start sampling
+    # TODO: batch inference check
 
     for prompt in prompts:
         outputs = hunyuan_video_sampler.predict(
